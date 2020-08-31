@@ -1,4 +1,4 @@
-### What are the possible container inside Azure ###
+### What are the possible containers inside Azure ? ###
 <img src="Cosmos-Overview.png">
 
 ## References ## 
