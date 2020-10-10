@@ -1,6 +1,6 @@
 {
   "scriptFile" : "../AzureFunctionHttpPost-0.0.1-SNAPSHOT.jar",
-  "entryPoint" : "raj.azure.archieve.functions.HttpTriggerFunction.run",
+  "entryPoint" : "raj.azure.archieve.azurefunction.HttpTriggerFunction.run",
   "bindings" : [ {
     "type" : "httpTrigger",
     "direction" : "in",

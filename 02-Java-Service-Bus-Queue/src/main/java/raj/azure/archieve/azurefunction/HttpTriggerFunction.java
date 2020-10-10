@@ -7,6 +7,8 @@ import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
 import raj.azure.archieve.azurefunctionservice.HttpTriggerFunctionService;
 import raj.azure.archieve.model.Student;
+import raj.azure.archieve.queuesetting.MultipleQueueSetting;
+import raj.azure.archieve.queuesetting.QueueSetting;
 
 /** Azure Functions with HTTP Trigger. */
 public class HttpTriggerFunction {
@@ -43,7 +45,11 @@ public class HttpTriggerFunction {
     }
   }
 
-  public HttpTriggerFunctionService provideHttpTriggerFunctionService(ExecutionContext executionContext, Student student){
-    return new HttpTriggerFunctionService(executionContext,student);
+  private HttpTriggerFunctionService provideHttpTriggerFunctionService(ExecutionContext executionContext, Student student){
+    return new HttpTriggerFunctionService(executionContext,student,provideQueueSetting());
+  }
+
+  private QueueSetting provideQueueSetting(){
+    return new MultipleQueueSetting();
   }
 }
