@@ -3,10 +3,10 @@
 ### 1. To Deploy to Azure portal ###
 - mvn clean install package azure-functions:deploy
 
-### 1. To run locally ###
+### 2. To run locally ###
 - mvn package azure-functions:run
 
-### 1. To debug Azure function locally ###
+### 3. To debug Azure function locally ###
 - mvn package azure-functions:run - DenableDebug
 
 ## Running project locally using IntelliJ IDE ##
@@ -16,3 +16,9 @@
 
 ## Sending data from postman to Azure function ##
 <img src="img/http-post.png"/>
+
+
+## How to create Azure Service Bus Namespace? ##
+
+
+## How to create queue inside Azure Service Bus Namespace ##
