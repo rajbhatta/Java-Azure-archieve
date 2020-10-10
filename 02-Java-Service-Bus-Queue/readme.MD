@@ -1,4 +1,4 @@
-## How to handle Azure functions ##
+## How to handle Azure functions ? ##
 
 ### 1. To Deploy to Azure portal ###
 - mvn clean install package azure-functions:deploy
@@ -26,7 +26,7 @@
 <img src="img/create-namespace.png"/>
 -Select connectionstring
 
-## How to create queue inside Azure Service Bus Namespace ##
+## How to create queue inside Azure Service Bus Namespace ? ##
 - Go inside namespace that you created in above step
 - click on add then you will have option as given below:
 <img src="img/create-queue.png"/>
