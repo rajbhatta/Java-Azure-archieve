@@ -1,18 +1,18 @@
 ## How to create Azure function in Java ##
 #### 1. Find proper archtype from the internet ####
-<img src="arch-step1.png"/>
+<img src="img/arch-step1.png"/>
 
 #### 2. Create maven project but check create from archtype ####
-<img src="arch-step2.png"/>
+<img src="img/arch-step2.png"/>
 
 #### 3. Locate azure properties ####
-<img src="arch-step3.png"/>
+<img src="img/arch-step3.png"/>
 
 #### 4. Add Azure properties ####
-<img src="arch-step4.png"/>
+<img src="img/arch-step4.png"/>
 
 #### 5. Update Azure properties ####
-<img src="arch-step5.png"/>
+<img src="img/arch-step5.png"/>
 
 
 ## How to  Azure functions ? ##
@@ -25,3 +25,8 @@
 
 ### 3. To debug Azure function locally ###
 - mvn package azure-functions:run - DenableDebug
+
+## Types of Azure function ##
+1. Http Trigger Azure function
+2. Time trigger Http function
+3. Queue trigger Http function
