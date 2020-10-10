@@ -18,7 +18,14 @@
 <img src="img/http-post.png"/>
 
 
-## How to create Azure Service Bus Namespace? ##
-
+## How to create Azure Service Bus Namespace and get connection string? ##
+- Goto Azure portal
+- Opened resource group that you created. If you don't have resource group create one
+- Click on Add -> search for service bus and click on create
+- Once Servicebus namespace is created, click on shared access policies as given below:
+<img src="img/create-namespace.png"/>
 
 ## How to create queue inside Azure Service Bus Namespace ##
+- Go inside namespace that you created in above step
+- click on add then you will have option as given below:
+<img src="img/create-queue"/>
