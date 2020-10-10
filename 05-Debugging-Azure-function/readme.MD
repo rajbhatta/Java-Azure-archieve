@@ -1,4 +1,4 @@
-## How to debug Azure function using IntelliJ ##
+## How to debug Azure function using IntelliJ ? ##
 ## Commands to Run Azure Functions ##
 
 ### Command to deploy to Azure portal ###
@@ -9,7 +9,6 @@
 
 ### Command to debug locally ###
 - mvn package azure-functions:run -DenableDebug
-    
     
     
 
