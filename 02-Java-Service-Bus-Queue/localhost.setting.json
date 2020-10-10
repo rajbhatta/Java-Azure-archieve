@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "SERVICE-BUS-CONNECTION-STRING": "Endpoint=sb://raj-azure-demo.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DZBe0DUS6S7S1u3uiHmL5XOZRPEvB/HnFRGc/j6nwP8=",
+    "FIRST-QUEUE-NAME": "queue-1",
+    "SECOND-QUEUE-NAME": "queue-2"
+  }
+}
