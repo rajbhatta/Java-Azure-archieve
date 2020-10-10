@@ -15,7 +15,7 @@
 <img src="img/arch-step5.png"/>
 
 
-## How to  Azure functions ? ##
+## How to handle  Azure functions ? ##
 
 ### 1. To Deploy to Azure portal ###
 - mvn clean install package azure-functions:deploy
