@@ -2,7 +2,7 @@
 #### 1. Find proper archtype from the internet ####
 <img src="img/arch-step1.png"/>
 
-#### 2. Create maven project but check create from archtype ####
+#### 2. Create maven project but check create from archtype and add information from step 1s ####
 <img src="img/arch-step2.png"/>
 
 #### 3. Locate azure properties ####
