@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "java",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=storageaccountazurebaa4;AccountKey=mrNbyqEGPcXglg35DEa6346m14AKczKJR3od6jvPW342HPsGgwwyVkRXR3QiK2WkUYlGdXqB/KGxKFrUGNtz/Q==;EndpointSuffix=core.windows.net",
+    "TABLE-STORAGE-CONNECTION-STRING":  "DefaultEndpointsProtocol=https;AccountName=storageaccountazurebaa4;AccountKey=mrNbyqEGPcXglg35DEa6346m14AKczKJR3od6jvPW342HPsGgwwyVkRXR3QiK2WkUYlGdXqB/KGxKFrUGNtz/Q==;EndpointSuffix=core.windows.net",
+    "FIRST-TABLE-NAME": "table1",
+    "SECOND-TABLE-NAME": "table2"
+  }
+}

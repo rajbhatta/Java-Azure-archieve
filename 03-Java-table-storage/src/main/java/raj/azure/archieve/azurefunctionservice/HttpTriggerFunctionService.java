@@ -4,19 +4,16 @@ import com.microsoft.azure.functions.ExecutionContext;
 import raj.azure.archieve.exception.AzureServiceBusException;
 import raj.azure.archieve.exception.ServiceBusHandlerException;
 import raj.azure.archieve.model.Student;
-import raj.azure.archieve.queuesetting.QueueSetting;
-import raj.azure.archieve.servicebus.AzureServiceBusClient;
-import raj.azure.archieve.servicebus.QueueService;
-import raj.azure.archieve.servicebus.QueueServiceImpl;
+import raj.azure.archieve.tablesetting.TableSetting;
 
 public class HttpTriggerFunctionService {
   ExecutionContext executionContext;
-  QueueSetting queueSetting;
+  TableSetting tableSetting;
 
   public HttpTriggerFunctionService(
-      ExecutionContext executionContext, QueueSetting queueSetting) {
+      ExecutionContext executionContext, TableSetting tableSetting) {
     this.executionContext = executionContext;
-    this.queueSetting = queueSetting;
+    this.tableSetting = tableSetting;
   }
 
   public void sendMessageToQueue(Student student) throws AzureServiceBusException, ServiceBusHandlerException {
@@ -26,7 +23,7 @@ public class HttpTriggerFunctionService {
   }
 
   private AzureServiceBusClient azureServiceBusClient(String queueName) {
-    return new AzureServiceBusClient(queueSetting.provideServiceBusString(), queueName);
+    return new AzureServiceBusClient(tableSetting.provideServiceBusString(), queueName);
   }
 
   private QueueService<Student> provideStudentQueueService(String queueName) {

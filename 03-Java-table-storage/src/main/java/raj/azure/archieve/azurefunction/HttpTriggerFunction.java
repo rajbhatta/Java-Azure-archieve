@@ -8,8 +8,8 @@ import raj.azure.archieve.azurefunctionservice.HttpTriggerFunctionService;
 import raj.azure.archieve.exception.AzureServiceBusException;
 import raj.azure.archieve.exception.ServiceBusHandlerException;
 import raj.azure.archieve.model.Student;
-import raj.azure.archieve.queuesetting.MultipleQueueSetting;
-import raj.azure.archieve.queuesetting.QueueSetting;
+import raj.azure.archieve.tablesetting.MultipleTableSetting;
+import raj.azure.archieve.tablesetting.TableSetting;
 
 import java.util.Optional;
 
@@ -54,7 +54,7 @@ public class HttpTriggerFunction {
     return new HttpTriggerFunctionService(executionContext,provideQueueSetting());
   }
 
-  private QueueSetting provideQueueSetting() {
-    return new MultipleQueueSetting();
+  private TableSetting provideQueueSetting() {
+    return new MultipleTableSetting();
   }
 }
