@@ -24,8 +24,9 @@
 - Click on Add -> search for service bus and click on create
 - Once Servicebus namespace is created, click on shared access policies as given below:
 <img src="img/create-namespace.png"/>
+-Select connectionstring
 
 ## How to create queue inside Azure Service Bus Namespace ##
 - Go inside namespace that you created in above step
 - click on add then you will have option as given below:
-<img src="img/create-queue"/>
+<img src="img/create-queue.png"/>
