@@ -23,7 +23,7 @@ public class HttpTriggerFunction {
               name = "req",
               methods = {HttpMethod.POST},
               authLevel = AuthorizationLevel.ANONYMOUS)
-              HttpRequestMessage<Optional<Student>> request,
+          HttpRequestMessage<Optional<Student>> request,
       final ExecutionContext context) {
     context.getLogger().info("Java HTTP trigger processed a request to create a user");
 
@@ -36,7 +36,7 @@ public class HttpTriggerFunction {
           .build();
     } else {
 
-      provideHttpTriggerFunctionService(context,student);
+      provideHttpTriggerFunctionService(context, student);
 
       return request
           .createResponseBuilder(HttpStatus.OK)
@@ -45,11 +45,12 @@ public class HttpTriggerFunction {
     }
   }
 
-  private HttpTriggerFunctionService provideHttpTriggerFunctionService(ExecutionContext executionContext, Student student){
-    return new HttpTriggerFunctionService(executionContext,student,provideQueueSetting());
+  private HttpTriggerFunctionService provideHttpTriggerFunctionService(
+      ExecutionContext executionContext, Student student) {
+    return new HttpTriggerFunctionService(executionContext, student, provideQueueSetting());
   }
 
-  private QueueSetting provideQueueSetting(){
+  private QueueSetting provideQueueSetting() {
     return new MultipleQueueSetting();
   }
 }

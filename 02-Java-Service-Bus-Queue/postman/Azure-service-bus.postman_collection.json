@@ -1,19 +1,19 @@
 {
-	"info": {
-		"_postman_id": "5934f46c-6997-4b3d-a66a-d0ee01add4e7",
-		"name": "Azure-service-bus",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Post-student",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": ""
-			},
-			"response": []
-		}
-	],
-	"protocolProfileBehavior": {}
+  "info": {
+    "_postman_id": "5934f46c-6997-4b3d-a66a-d0ee01add4e7",
+    "name": "Azure-service-bus",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Post-student",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": ""
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
 }

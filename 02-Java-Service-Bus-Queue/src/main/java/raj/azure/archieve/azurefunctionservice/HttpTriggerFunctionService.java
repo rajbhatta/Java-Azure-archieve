@@ -14,11 +14,8 @@ public class HttpTriggerFunctionService {
   Student student;
   QueueSetting queueSetting;
 
-
   public HttpTriggerFunctionService(
-      ExecutionContext executionContext,
-      Student student,
-      QueueSetting queueSetting) {
+      ExecutionContext executionContext, Student student, QueueSetting queueSetting) {
     this.executionContext = executionContext;
     this.student = student;
     this.queueSetting = queueSetting;
@@ -26,16 +23,15 @@ public class HttpTriggerFunctionService {
 
   public void sendMessageToQueue() throws AzureServiceBusException, ServiceBusHandlerException {
     String queueName = student.getQueueName();
-    QueueService<Student> studentQueueService=provideStudentQueueService(queueName);
+    QueueService<Student> studentQueueService = provideStudentQueueService(queueName);
     studentQueueService.sendMessage(student);
   }
 
-  private AzureServiceBusClient azureServiceBusClient(String queueName){
-      return new AzureServiceBusClient(queueSetting.provideServiceBusString(),queueName);
+  private AzureServiceBusClient azureServiceBusClient(String queueName) {
+    return new AzureServiceBusClient(queueSetting.provideServiceBusString(), queueName);
   }
 
-  private QueueService<Student> provideStudentQueueService(String queueName){
-      return new QueueServiceImpl<>(azureServiceBusClient(queueName));
+  private QueueService<Student> provideStudentQueueService(String queueName) {
+    return new QueueServiceImpl<>(azureServiceBusClient(queueName));
   }
-
 }

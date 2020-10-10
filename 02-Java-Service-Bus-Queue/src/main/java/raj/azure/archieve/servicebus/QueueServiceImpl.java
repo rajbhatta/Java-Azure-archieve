@@ -20,14 +20,15 @@ public class QueueServiceImpl<T> implements QueueService<T> {
 
   @Override
   public void sendMessage(T t) throws AzureServiceBusException, ServiceBusHandlerException {
-    QueueClient queueClient=azureServiceBusClient.createQueueClient();
-    Message message=prepareMessage(t);
+    QueueClient queueClient = azureServiceBusClient.createQueueClient();
+    Message message = prepareMessage(t);
     queueClient.sendAsync(message);
     azureServiceBusClient.closeConnection();
   }
+
   private Message prepareMessage(T t) throws ServiceBusHandlerException {
     try {
-      String stringMessageBody=  provideObjectMapper().writeValueAsString(t);
+      String stringMessageBody = provideObjectMapper().writeValueAsString(t);
       Message message = new Message(stringMessageBody);
       message.setContentType("test/plain");
       message.setLabel(UUID.randomUUID().toString());
@@ -35,12 +36,11 @@ public class QueueServiceImpl<T> implements QueueService<T> {
       message.setTimeToLive(Duration.ofMinutes(10));
       return message;
     } catch (JsonProcessingException e) {
-      throw new ServiceBusHandlerException("JsonProcessingException",e);
+      throw new ServiceBusHandlerException("JsonProcessingException", e);
     }
-
   }
-  private ObjectMapper provideObjectMapper(){
+
+  private ObjectMapper provideObjectMapper() {
     return new ObjectMapper();
   }
-
 }

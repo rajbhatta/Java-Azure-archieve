@@ -12,7 +12,7 @@ public class AzureServiceBusClient {
   private String queueName;
   private QueueClient queueClient;
 
-  //This helps to perform unit testing
+  // This helps to perform unit testing
   public AzureServiceBusClient(QueueClient queueClient) {
     this.queueClient = queueClient;
   }
@@ -22,7 +22,6 @@ public class AzureServiceBusClient {
     this.queueName = queueName;
   }
 
-
   public QueueClient createQueueClient() throws AzureServiceBusException {
     if (queueClient == null) {
       try {
@@ -31,27 +30,25 @@ public class AzureServiceBusClient {
                 new ConnectionStringBuilder(serviceBusNamespaceConnectionString, queueName),
                 ReceiveMode.PEEKLOCK);
       } catch (InterruptedException e) {
-       throw new AzureServiceBusException("InterruptedException",e);
+        throw new AzureServiceBusException("InterruptedException", e);
       } catch (ServiceBusException e) {
-        throw new AzureServiceBusException("ServiceBusException",e);
+        throw new AzureServiceBusException("ServiceBusException", e);
       }
     }
     return queueClient;
   }
 
-  public void sendMessage(Message message){
+  public void sendMessage(Message message) {
     queueClient.sendAsync(message);
   }
 
   public void closeConnection() throws AzureServiceBusException {
-    if(queueClient!=null){
+    if (queueClient != null) {
       try {
         queueClient.close();
       } catch (ServiceBusException e) {
-        throw new AzureServiceBusException("Error closing service bus connection",e);
+        throw new AzureServiceBusException("Error closing service bus connection", e);
       }
     }
   }
-
-
 }
