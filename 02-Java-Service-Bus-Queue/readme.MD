@@ -60,7 +60,7 @@ public class HttpTriggerFunction {
               name = "req",
               methods = {HttpMethod.POST},
               authLevel = AuthorizationLevel.ANONYMOUS)
-              HttpRequestMessage<Optional<Student>> request,
+          HttpRequestMessage<Optional<Student>> request,
       final ExecutionContext context) {
     context.getLogger().info("Java HTTP trigger processed a request to create a user");
 
@@ -73,7 +73,7 @@ public class HttpTriggerFunction {
           .build();
     } else {
 
-      provideHttpTriggerFunctionService(context,student);
+      provideHttpTriggerFunctionService(context, student);
 
       return request
           .createResponseBuilder(HttpStatus.OK)
@@ -82,15 +82,15 @@ public class HttpTriggerFunction {
     }
   }
 
-  private HttpTriggerFunctionService provideHttpTriggerFunctionService(ExecutionContext executionContext, Student student){
-    return new HttpTriggerFunctionService(executionContext,student,provideQueueSetting());
+  private HttpTriggerFunctionService provideHttpTriggerFunctionService(
+      ExecutionContext executionContext, Student student) {
+    return new HttpTriggerFunctionService(executionContext, student, provideQueueSetting());
   }
 
-  private QueueSetting provideQueueSetting(){
+  private QueueSetting provideQueueSetting() {
     return new MultipleQueueSetting();
   }
 }
-
 ```
 
 #### 2. Service Bus Queue Client Handler ####
@@ -109,7 +109,7 @@ public class AzureServiceBusClient {
   private String queueName;
   private QueueClient queueClient;
 
-  //This helps to perform unit testing
+  // This helps to perform unit testing
   public AzureServiceBusClient(QueueClient queueClient) {
     this.queueClient = queueClient;
   }
@@ -119,7 +119,6 @@ public class AzureServiceBusClient {
     this.queueName = queueName;
   }
 
-
   public QueueClient createQueueClient() throws AzureServiceBusException {
     if (queueClient == null) {
       try {
@@ -128,31 +127,28 @@ public class AzureServiceBusClient {
                 new ConnectionStringBuilder(serviceBusNamespaceConnectionString, queueName),
                 ReceiveMode.PEEKLOCK);
       } catch (InterruptedException e) {
-       throw new AzureServiceBusException("InterruptedException",e);
+        throw new AzureServiceBusException("InterruptedException", e);
       } catch (ServiceBusException e) {
-        throw new AzureServiceBusException("ServiceBusException",e);
+        throw new AzureServiceBusException("ServiceBusException", e);
       }
     }
     return queueClient;
   }
 
-  public void sendMessage(Message message){
+  public void sendMessage(Message message) {
     queueClient.sendAsync(message);
   }
 
   public void closeConnection() throws AzureServiceBusException {
-    if(queueClient!=null){
+    if (queueClient != null) {
       try {
         queueClient.close();
       } catch (ServiceBusException e) {
-        throw new AzureServiceBusException("Error closing service bus connection",e);
+        throw new AzureServiceBusException("Error closing service bus connection", e);
       }
     }
   }
-
-
 }
-
 ```
 
 #### 3. Generic Queue Service ####
@@ -163,7 +159,7 @@ import raj.azure.archieve.exception.AzureServiceBusException;
 import raj.azure.archieve.exception.ServiceBusHandlerException;
 
 public interface QueueService<T> {
-   void sendMessage(T t) throws AzureServiceBusException, ServiceBusHandlerException;
+  void sendMessage(T t) throws AzureServiceBusException, ServiceBusHandlerException;
 }
 
 ```
@@ -192,14 +188,15 @@ public class QueueServiceImpl<T> implements QueueService<T> {
 
   @Override
   public void sendMessage(T t) throws AzureServiceBusException, ServiceBusHandlerException {
-    QueueClient queueClient=azureServiceBusClient.createQueueClient();
-    Message message=prepareMessage(t);
+    QueueClient queueClient = azureServiceBusClient.createQueueClient();
+    Message message = prepareMessage(t);
     queueClient.sendAsync(message);
     azureServiceBusClient.closeConnection();
   }
+
   private Message prepareMessage(T t) throws ServiceBusHandlerException {
     try {
-      String stringMessageBody=  provideObjectMapper().writeValueAsString(t);
+      String stringMessageBody = provideObjectMapper().writeValueAsString(t);
       Message message = new Message(stringMessageBody);
       message.setContentType("test/plain");
       message.setLabel(UUID.randomUUID().toString());
@@ -207,16 +204,14 @@ public class QueueServiceImpl<T> implements QueueService<T> {
       message.setTimeToLive(Duration.ofMinutes(10));
       return message;
     } catch (JsonProcessingException e) {
-      throw new ServiceBusHandlerException("JsonProcessingException",e);
+      throw new ServiceBusHandlerException("JsonProcessingException", e);
     }
-
   }
-  private ObjectMapper provideObjectMapper(){
+
+  private ObjectMapper provideObjectMapper() {
     return new ObjectMapper();
   }
-
 }
-
 ```
 
 #### 5. Injector between Azure function and service bus queue ####
@@ -237,11 +232,8 @@ public class HttpTriggerFunctionService {
   Student student;
   QueueSetting queueSetting;
 
-
   public HttpTriggerFunctionService(
-      ExecutionContext executionContext,
-      Student student,
-      QueueSetting queueSetting) {
+      ExecutionContext executionContext, Student student, QueueSetting queueSetting) {
     this.executionContext = executionContext;
     this.student = student;
     this.queueSetting = queueSetting;
@@ -249,18 +241,17 @@ public class HttpTriggerFunctionService {
 
   public void sendMessageToQueue() throws AzureServiceBusException, ServiceBusHandlerException {
     String queueName = student.getQueueName();
-    QueueService<Student> studentQueueService=provideStudentQueueService(queueName);
+    QueueService<Student> studentQueueService = provideStudentQueueService(queueName);
     studentQueueService.sendMessage(student);
   }
 
-  private AzureServiceBusClient azureServiceBusClient(String queueName){
-      return new AzureServiceBusClient(queueSetting.provideServiceBusString(),queueName);
+  private AzureServiceBusClient azureServiceBusClient(String queueName) {
+    return new AzureServiceBusClient(queueSetting.provideServiceBusString(), queueName);
   }
 
-  private QueueService<Student> provideStudentQueueService(String queueName){
-      return new QueueServiceImpl<>(azureServiceBusClient(queueName));
+  private QueueService<Student> provideStudentQueueService(String queueName) {
+    return new QueueServiceImpl<>(azureServiceBusClient(queueName));
   }
-
 }
 ```
 
